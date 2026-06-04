@@ -1,0 +1,46 @@
+{
+	"name": "@nesvet/biome-config",
+	"version": "1.0.0",
+	"description": "Nesvet Biome config",
+	"keywords": [
+		"biome",
+		"config",
+		"nesvet"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nesvet/biome-config.git"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"author": "Eugene Nesvetaev <dev@nesvet.dev> (https://nesvet.dev/)",
+	"type": "module",
+	"exports": {
+		".": "./biome.json",
+		"./node": "./presets/node.json"
+	},
+	"files": [
+		"biome.json",
+		"presets",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"check": "biome check biome.json presets scripts",
+		"check:fix": "biome check --write biome.json presets scripts",
+		"check:tests": "node scripts/verify-fixtures.mjs"
+	},
+	"peerDependencies": {
+		"@biomejs/biome": ">=2.4.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.16"
+	},
+	"packageManager": "bun@1.3.14",
+	"engines": {
+		"node": ">=22",
+		"bun": ">=1.3"
+	}
+}

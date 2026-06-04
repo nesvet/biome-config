@@ -1,0 +1,179 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"files": {
+		"ignoreUnknown": true
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 320,
+		"lineEnding": "lf"
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"semicolons": "always",
+			"trailingCommas": "all",
+			"arrowParentheses": "asNeeded",
+			"bracketSpacing": true
+		}
+	},
+	"json": {
+		"formatter": {
+			"enabled": true,
+			"indentStyle": "tab",
+			"lineWidth": 320
+		},
+		"linter": {
+			"enabled": true
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [[":BUN:", ":NODE:"], ":BLANK_LINE:", ":PACKAGE:", ":BLANK_LINE:", ":ALIAS:", ":BLANK_LINE:", ":PATH:"]
+					}
+				}
+			}
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"noForEach": "warn"
+			},
+			"nursery": {
+				"noImpliedEval": "error"
+			},
+			"security": {
+				"noGlobalEval": "error"
+			},
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedFunctionParameters": {
+					"level": "error",
+					"options": {
+						"ignoreRestSiblings": true
+					}
+				},
+				"noUnusedVariables": {
+					"level": "error",
+					"options": {
+						"ignoreRestSiblings": true
+					}
+				}
+			},
+			"style": {
+				"noParameterAssign": "error",
+				"useArrayLiterals": "warn",
+				"useBlockStatements": "error",
+				"useConst": "warn",
+				"useNamingConvention": {
+					"level": "error",
+					"options": {
+						"strictCase": false,
+						"conventions": [
+							{
+								"selector": { "kind": "variable" },
+								"match": "(_*)?(.*)",
+								"formats": ["camelCase"]
+							},
+							{
+								"selector": { "kind": "function" },
+								"match": "(_*)?(.*)",
+								"formats": ["camelCase", "PascalCase"]
+							},
+							{
+								"selector": { "kind": "class" },
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": { "kind": "interface" },
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": { "kind": "typeAlias" },
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": { "kind": "enum" },
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": { "kind": "enumMember" },
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": { "kind": "const", "scope": "global" },
+								"match": "(_*)?(.*)",
+								"formats": ["camelCase", "CONSTANT_CASE", "PascalCase"]
+							}
+						]
+					}
+				},
+				"useThrowOnlyError": "error",
+				"noDefaultExport": "warn"
+			},
+			"suspicious": {
+				"noConsole": {
+					"level": "warn",
+					"options": {
+						"allow": ["info", "warn", "error", "group", "groupEnd"]
+					}
+				},
+				"noDoubleEquals": {
+					"level": "error",
+					"options": {
+						"ignoreNull": true
+					}
+				},
+				"noUnusedExpressions": "error",
+				"noVar": "error",
+				"noSelfCompare": "error",
+				"noTemplateCurlyInString": "error",
+				"useAwait": "error"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.{jsx,tsx}"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"useExhaustiveDependencies": "warn",
+						"noUnknownProperty": "error",
+						"noChildrenProp": "error",
+						"useJsxKeyInIterable": "error"
+					},
+					"a11y": {
+						"useKeyWithClickEvents": "warn",
+						"useValidAnchor": "warn"
+					},
+					"style": {
+						"useSelfClosingElements": "warn"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["**/*.{jsonc,json5}"],
+			"json": {
+				"formatter": {
+					"enabled": true,
+					"indentStyle": "tab",
+					"lineWidth": 320
+				},
+				"linter": {
+					"enabled": true
+				}
+			}
+		}
+	]
+}
