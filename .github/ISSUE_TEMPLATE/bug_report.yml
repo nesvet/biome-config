@@ -1,0 +1,50 @@
+name: "Bug report"
+description: "Report a reproducible issue"
+title: "[Bug]: "
+labels: [ "bug" ]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: "What happened?"
+      description: "Describe the issue clearly."
+      placeholder: "Biome reported … / the shared config did not …"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      description: "A minimal biome.json and a source file that shows the problem."
+      placeholder: "1. extends @nesvet/biome-config\n2. Run biome check …"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "What did you expect?"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: "What actually happened?"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "OS, Biome version, @nesvet/biome-config version."
+      placeholder: "macOS 15, @biomejs/biome 2.5.9, @nesvet/biome-config 2.0.0"
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "I'm using the latest version"
+          required: true
+        - label: "I've searched existing issues"
+          required: true

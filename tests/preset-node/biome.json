@@ -1,6 +1,6 @@
 {
-	"$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
-	"root": true,
+	"$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
+	"root": false,
 	"extends": ["../../presets/node.json"],
 	"files": {
 		"includes": ["fixtures/**"]

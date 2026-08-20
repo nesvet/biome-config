@@ -1,0 +1,27 @@
+name: "Feature request"
+description: "Suggest an improvement or a new preset/rule"
+title: "[Feature]: "
+labels: [ "enhancement" ]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: "What problem does this solve?"
+      description: "The pain point in your repo, not a user story."
+      placeholder: "I need … but the shared config currently …"
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed solution"
+      description: "How should this work?"
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives considered"
+      description: "Local overrides, another rule, or a new export?"
+    validations:
+      required: false

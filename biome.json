@@ -1,5 +1,5 @@
 {
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
 	"files": {
 		"ignoreUnknown": true
 	},
@@ -10,10 +10,11 @@
 		"lineEnding": "lf"
 	},
 	"javascript": {
+		"globals": ["Bun"],
 		"formatter": {
 			"quoteStyle": "double",
 			"semicolons": "always",
-			"trailingCommas": "all",
+			"trailingCommas": "none",
 			"arrowParentheses": "asNeeded",
 			"bracketSpacing": true
 		}
@@ -21,8 +22,7 @@
 	"json": {
 		"formatter": {
 			"enabled": true,
-			"indentStyle": "tab",
-			"lineWidth": 320
+			"trailingCommas": "none"
 		},
 		"linter": {
 			"enabled": true
@@ -35,7 +35,8 @@
 				"organizeImports": {
 					"level": "on",
 					"options": {
-						"groups": [[":BUN:", ":NODE:"], ":BLANK_LINE:", ":PACKAGE:", ":BLANK_LINE:", ":ALIAS:", ":BLANK_LINE:", ":PATH:"]
+						"sortBareImports": true,
+						"groups": [[":BUN:", ":NODE:"], ":PACKAGE:", ":ALIAS:", ":PATH:", ":STYLE:"]
 					}
 				}
 			}
@@ -43,13 +44,23 @@
 	},
 	"linter": {
 		"enabled": true,
+		"domains": {
+			"types": "all"
+		},
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
 			"complexity": {
 				"noForEach": "warn"
 			},
 			"nursery": {
-				"noImpliedEval": "error"
+				"noFloatingPromises": "error",
+				"noImpliedEval": "error",
+				"noInvalidPropertyInitValue": "error",
+				"noLoopFunc": "warn",
+				"noMisusedPromises": "error",
+				"useAwaitThenable": "error",
+				"useDomNodeTextContent": "warn",
+				"useMathMinMax": "warn"
 			},
 			"security": {
 				"noGlobalEval": "error"
@@ -70,10 +81,19 @@
 				}
 			},
 			"style": {
+				"noCommonJs": "error",
 				"noParameterAssign": "error",
 				"useArrayLiterals": "warn",
 				"useBlockStatements": "error",
 				"useConst": "warn",
+				"useConsistentTypeDefinitions": {
+					"level": "error",
+					"options": {
+						"style": "type"
+					}
+				},
+				"useExportType": "error",
+				"useImportType": "error",
 				"useNamingConvention": {
 					"level": "error",
 					"options": {
@@ -117,6 +137,9 @@
 						]
 					}
 				},
+				"useErrorCause": "warn",
+				"useNodejsImportProtocol": "off",
+				"useThrowNewError": "error",
 				"useThrowOnlyError": "error",
 				"noDefaultExport": "warn"
 			},
@@ -127,6 +150,8 @@
 						"allow": ["info", "warn", "error", "group", "groupEnd"]
 					}
 				},
+				"noEvolvingTypes": "warn",
+				"noUnassignedVariables": "error",
 				"noDoubleEquals": {
 					"level": "error",
 					"options": {
@@ -166,9 +191,7 @@
 			"includes": ["**/*.{jsonc,json5}"],
 			"json": {
 				"formatter": {
-					"enabled": true,
-					"indentStyle": "tab",
-					"lineWidth": 320
+					"enabled": true
 				},
 				"linter": {
 					"enabled": true

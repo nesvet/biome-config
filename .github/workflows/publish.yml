@@ -15,7 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+      - run: test "$GITHUB_REF_NAME" = "$(jq -r .version package.json)"
+      - run: bun run check
+      - run: bun run check:tests
+
       - uses: actions/setup-node@v6
         with:
           node-version: "24"
-      - run: npm publish
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm publish --provenance --access public
