@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.10/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
 	"files": {
 		"ignoreUnknown": true
 	},
@@ -100,13 +100,33 @@
 						"strictCase": false,
 						"conventions": [
 							{
+								"selector": { "kind": "const", "scope": "global" },
+								"match": "(?:[_$]*)?(.*)",
+								"formats": ["camelCase", "CONSTANT_CASE", "PascalCase"]
+							},
+							{
+								"selector": { "kind": "const" },
+								"match": "(?:[_$]*)?(.*)",
+								"formats": ["camelCase", "PascalCase"]
+							},
+							{
 								"selector": { "kind": "variable" },
-								"match": "(_*)?(.*)",
+								"match": "(?:[_$]*)?(.*)",
 								"formats": ["camelCase"]
 							},
 							{
+								"selector": { "kind": "objectLiteralProperty" },
+								"match": "(?:[_$]*)?(.*)",
+								"formats": ["camelCase", "CONSTANT_CASE"]
+							},
+							{
+								"selector": { "kind": "typeProperty" },
+								"match": "(?:[_$]*)?(.*)",
+								"formats": ["camelCase", "CONSTANT_CASE"]
+							},
+							{
 								"selector": { "kind": "function" },
-								"match": "(_*)?(.*)",
+								"match": "(?:[_$]*)?(.*)",
 								"formats": ["camelCase", "PascalCase"]
 							},
 							{
@@ -128,11 +148,6 @@
 							{
 								"selector": { "kind": "enumMember" },
 								"formats": ["PascalCase"]
-							},
-							{
-								"selector": { "kind": "const", "scope": "global" },
-								"match": "(_*)?(.*)",
-								"formats": ["camelCase", "CONSTANT_CASE", "PascalCase"]
 							}
 						]
 					}
@@ -195,6 +210,16 @@
 				},
 				"linter": {
 					"enabled": true
+				}
+			}
+		},
+		{
+			"includes": ["**/*.config.{ts,js,mjs,cjs,mts,cts}"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noDefaultExport": "off"
+					}
 				}
 			}
 		}

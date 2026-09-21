@@ -1,6 +1,6 @@
 {
 	"name": "@nesvet/biome-config",
-	"version": "2.0.0",
+	"version": "2.0.5",
 	"description": "Shareable Biome config: formatter, linter, import organization, type-aware rules",
 	"keywords": [
 		"biome",
@@ -46,7 +46,7 @@
 		"@biomejs/biome": "^2.5.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.10"
+		"@biomejs/biome": "^2.5.14"
 	},
-	"packageManager": "bun@1.4.0"
+	"packageManager": "bun@1.4.2"
 }

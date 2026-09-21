@@ -33,6 +33,25 @@ function assertValid(cwd: string, paths: string[], label: string): void {
 	}
 }
 
+function assertPassesErrorOnWarnings(cwd: string, paths: string[], label: string): void {
+	const result = runCheck(cwd, paths, ["--error-on-warnings"]);
+
+	if (result.status !== 0) {
+		console.error(`Expected fixtures to pass with --error-on-warnings (${label}):\n`, result.stdout, result.stderr);
+		process.exit(1);
+	}
+}
+
+function assertNoDefaultExportOff(cwd: string, paths: string[], label: string): void {
+	const result = runCheck(cwd, paths, ["--error-on-warnings"]);
+	const output = combinedOutput(result);
+
+	if (result.status !== 0 || output.includes("noDefaultExport")) {
+		console.error(`Expected config fixtures to pass without noDefaultExport (${label}):\n`, result.stdout, result.stderr);
+		process.exit(1);
+	}
+}
+
 function assertInvalidCases(cwd: string, cases: InvalidFixture[], label: string): void {
 	for (const { path, diagnostic } of cases) {
 		const result = runCheck(cwd, [path]);
@@ -44,12 +63,19 @@ function assertInvalidCases(cwd: string, cases: InvalidFixture[], label: string)
 	}
 }
 
-assertValid(testsRoot, ["fixtures/valid.ts", "fixtures/react.tsx", "fixtures/valid-unused-underscore.ts", "fixtures/valid-fs-import.ts", "fixtures/valid-type.ts", "fixtures/valid-imports.ts", "fixtures/sibling.ts"], "base");
+assertValid(testsRoot, ["fixtures/valid.ts", "fixtures/react.tsx", "fixtures/valid-unused-underscore.ts", "fixtures/valid-fs-import.ts", "fixtures/valid-type.ts", "fixtures/valid-imports.ts", "fixtures/sibling.ts", "fixtures/valid-naming-env.ts", "fixtures/valid-naming-const-component.tsx"], "base");
+
+assertPassesErrorOnWarnings(testsRoot, ["fixtures/valid-naming-env.ts", "fixtures/valid-naming-const-component.tsx"], "naming");
+
+assertNoDefaultExportOff(testsRoot, ["fixtures/valid.config.ts", "fixtures/valid.config.js"], "config default export");
 
 assertInvalidCases(
 	testsRoot,
 	[
 		{ path: "fixtures/invalid-naming.ts", diagnostic: "useNamingConvention" },
+		{ path: "fixtures/invalid-naming-object-snake.ts", diagnostic: "useNamingConvention" },
+		{ path: "fixtures/invalid-naming-object-pascal.ts", diagnostic: "useNamingConvention" },
+		{ path: "fixtures/invalid-naming-let-pascal.ts", diagnostic: "useNamingConvention" },
 		{ path: "fixtures/invalid-default-export.ts", diagnostic: "noDefaultExport" },
 		{ path: "fixtures/invalid-eval.ts", diagnostic: "noGlobalEval" },
 		{ path: "fixtures/invalid-implied-eval.ts", diagnostic: "noImpliedEval" },
