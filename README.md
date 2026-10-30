@@ -5,7 +5,9 @@
 
 My [Biome](https://biomejs.dev/) config. Tabs, double quotes, `type` over `interface`, no trailing commas, almost no wrapping (`lineWidth: 320`).
 
-Needs `@biomejs/biome` `^2.5.0`.
+Needs `@biomejs/biome` `^2.6.4`.
+
+Markdown and YAML are in the same check. GitHub Flavored Markdown stays, including a leading `---` frontmatter block. Ordinary YAML strings use double quotes. Fenced JavaScript is formatted like the rest of your code, and those snippets are not linted. Paragraphs stay on the lines you wrote. Table columns are aligned.
 
 ```sh
 bun add -d @nesvet/biome-config @biomejs/biome

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-31
+
+### Changed
+
+- **Breaking:** require `@biomejs/biome` `^2.6.4`.
+- Move `noLoopFunc` to `suspicious`. `recommended` now covers `useMathMinMax` and `useDomNodeTextContent`.
+- **Breaking:** format and lint Markdown and YAML. GFM and YAML frontmatter stay on. `proseWrap` is `preserve`. Fenced code is formatted and not linted. YAML `quoteStyle` is `double`. `useConsistentHeadingLevel`, `useFencedCodeLanguage`, and `useSingleTopLevelHeading` are warn.
+- CI and publish pin Bun `1.4.4`.
+
 ## [2.0.5] - 2026-09-21
 
 ### Changed
@@ -42,7 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/nesvet/biome-config/compare/2.0.5...HEAD
+[Unreleased]: https://github.com/nesvet/biome-config/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/nesvet/biome-config/compare/2.0.5...3.0.0
 [2.0.5]: https://github.com/nesvet/biome-config/compare/2.0.0...2.0.5
 [2.0.0]: https://github.com/nesvet/biome-config/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/nesvet/biome-config/releases/tag/1.0.0

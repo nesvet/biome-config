@@ -1,5 +1,5 @@
 import { type SpawnSyncReturns, spawnSync } from "node:child_process";
-import { copyFileSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -109,6 +109,66 @@ try {
 	copyFileSync(join(packageRoot, "biome.json"), join(sandbox, "biome.json"));
 	writeFileSync(join(sandbox, "ok.ts"), "export const value = 1;\n");
 	assertValid(sandbox, ["ok.ts"], "folder without git");
+
+	const notePath = join(sandbox, "note.md");
+
+	writeFileSync(notePath, "---\ntitle: Hello\n---\n\n# Doc\n\nOne line\nstays two.\n\n| A | B |\n| --- | --- |\n| 1 | 2 |\n\n```js\nconst value = [1, 2, 3,];\n```\n");
+
+	const noteWrite = runCheck(sandbox, ["note.md"], ["--write"]);
+
+	if (noteWrite.status !== 0) {
+		console.error("Expected note.md to format:\n", noteWrite.stdout, noteWrite.stderr);
+		process.exit(1);
+	}
+
+	const note = readFileSync(notePath, "utf8");
+
+	if (!note.startsWith("---\ntitle: Hello\n---\n") || !note.includes("One line\nstays two.") || note.includes("[1, 2, 3,]") || !note.includes("[1, 2, 3]")) {
+		console.error("Expected note.md to keep frontmatter and the paragraph, and to drop the trailing comma:\n", note);
+		process.exit(1);
+	}
+
+	const noteAgain = runCheck(sandbox, ["note.md"]);
+
+	if (noteAgain.status !== 0) {
+		console.error("Expected a second check of note.md to pass:\n", noteAgain.stdout, noteAgain.stderr);
+		process.exit(1);
+	}
+
+	const yamlPath = join(sandbox, "sample.yaml");
+
+	writeFileSync(yamlPath, "name: 'single'\n");
+
+	const yamlWrite = runCheck(sandbox, ["sample.yaml"], ["--write"]);
+
+	if (yamlWrite.status !== 0) {
+		console.error("Expected sample.yaml to format:\n", yamlWrite.stdout, yamlWrite.stderr);
+		process.exit(1);
+	}
+
+	const yaml = readFileSync(yamlPath, "utf8");
+
+	if (!yaml.includes('name: "single"')) {
+		console.error("Expected sample.yaml to use double quotes:\n", yaml);
+		process.exit(1);
+	}
+
+	const yamlAgain = runCheck(sandbox, ["sample.yaml"]);
+
+	if (yamlAgain.status !== 0) {
+		console.error("Expected a second check of sample.yaml to pass:\n", yamlAgain.stdout, yamlAgain.stderr);
+		process.exit(1);
+	}
+
+	writeFileSync(join(sandbox, "bad.md"), "# One\n\n### Skipped\n\n```\ncode\n```\n");
+
+	const bad = runCheck(sandbox, ["bad.md"]);
+	const badOutput = combinedOutput(bad);
+
+	if (!badOutput.includes("useConsistentHeadingLevel") || !badOutput.includes("useFencedCodeLanguage")) {
+		console.error("Expected Markdown nursery diagnostics:\n", bad.stdout, bad.stderr);
+		process.exit(1);
+	}
 } finally {
 	rmSync(sandbox, { recursive: true, force: true });
 }
