@@ -34,7 +34,7 @@ Monorepo package:
 }
 ```
 
-Override anything in your own `biome.json`. Files matching `*.config.ts` / `*.config.js` (and `.mjs`, `.cjs`, `.mts`, `.cts`) may use a default export: `noDefaultExport` is off there so tool configs still format and lint. Object and type property names may be CONSTANT_CASE (POSIX env keys) and may start with `_` or `$`. A `const` may be PascalCase; a `let` may not.
+Override anything in your own `biome.json`. Files matching `*.config.ts` / `*.config.js` (and `.mjs`, `.cjs`, `.mts`, `.cts`) and `*.d.ts` may use a default export: `noDefaultExport` is off there. Tool configs need it, and `declare module "*.css"` is how CSS modules are typed. Those files still format and lint. Object and type property names may be CONSTANT_CASE (POSIX env keys) and may start with `_` or `$`. A `const` may be PascalCase; a `let` may not.
 
 ## Contributing
 

@@ -239,7 +239,7 @@
 			}
 		},
 		{
-			"includes": ["**/*.config.{ts,js,mjs,cjs,mts,cts}"],
+			"includes": ["**/*.config.{ts,js,mjs,cjs,mts,cts}", "**/*.d.ts"],
 			"linter": {
 				"rules": {
 					"style": {

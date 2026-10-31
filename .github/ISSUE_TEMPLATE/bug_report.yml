@@ -36,7 +36,7 @@ body:
     attributes:
       label: "Environment"
       description: "OS, Biome version, @nesvet/biome-config version."
-      placeholder: "macOS 15, @biomejs/biome 2.6.4, @nesvet/biome-config 3.0.0, Bun 1.4.4"
+      placeholder: "macOS 15, @biomejs/biome 2.6.4, @nesvet/biome-config 3.0.1, Bun 1.4.4"
     validations:
       required: true
   - type: checkboxes

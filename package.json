@@ -1,6 +1,6 @@
 {
 	"name": "@nesvet/biome-config",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Shareable Biome config: formatter, linter, import organization, type-aware rules",
 	"keywords": [
 		"biome",

@@ -67,7 +67,7 @@ assertValid(testsRoot, ["fixtures/valid.ts", "fixtures/react.tsx", "fixtures/val
 
 assertPassesErrorOnWarnings(testsRoot, ["fixtures/valid-naming-env.ts", "fixtures/valid-naming-const-component.tsx"], "naming");
 
-assertNoDefaultExportOff(testsRoot, ["fixtures/valid.config.ts", "fixtures/valid.config.js"], "config default export");
+assertNoDefaultExportOff(testsRoot, ["fixtures/valid.config.ts", "fixtures/valid.config.js", "fixtures/valid-css-module.d.ts"], "config and ambient default export");
 
 assertInvalidCases(
 	testsRoot,

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-10-31
+
+### Changed
+
+- Turn `noDefaultExport` off for `*.d.ts`. `export default` inside `declare module "*.css"` is the CSS module ambient form, and the `*.config.*` exception does not cover it.
+
 ## [3.0.0] - 2026-10-31
 
 ### Changed
@@ -51,7 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/nesvet/biome-config/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/nesvet/biome-config/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/nesvet/biome-config/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/nesvet/biome-config/compare/2.0.5...3.0.0
 [2.0.5]: https://github.com/nesvet/biome-config/compare/2.0.0...2.0.5
 [2.0.0]: https://github.com/nesvet/biome-config/compare/1.0.0...2.0.0
